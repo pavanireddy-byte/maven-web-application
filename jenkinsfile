@@ -1,0 +1,37 @@
+node('master')
+{
+    properties([[$class: 'JiraProjectProperty'], buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
+    def mavenHome = tool name: "maven3.6.3"
+    stage('checkoutcode')
+    {
+        git branch: 'development', credentialsId: 'c2cd6cb8-26c4-4dcc-8065-56bc9175a925', url: 'https://github.com/pavanireddy-byte/maven-web-application.git'
+    }
+    stage('build')
+    {
+    sh "${mavenHome}/bin/mvn clean package"
+    }
+   stage('executesonarqubereport')
+    {
+        sh "${mavenHome}/bin/mvn sonar:sonar"
+    }
+    stage('uploadartifactintonexus')
+    {
+     sh "${mavenHome}/bin/mvn deploy"   
+    }
+    stage('deployappintotomcatserver')
+    {
+      sshagent(['c9b02c63-f0fe-4391-bae0-eb4e23e5a5cb'])
+      {
+        sh "scp -o stricthostkeychecking=no target/maven-web-application.war ec2-user@52.66.249.225:/opt/apache-tomcat-9.0.39/webapps/"
+      }
+    }
+   /*
+   stage('sendmailnotification')
+    {
+      mail bcc: '', body: '''project is done.
+
+thanks & regards,
+pavani''', cc: 'thanjuareddy65@gmail.com', from: '', replyTo: '', subject: 'output', to: 'pavanireddyperugu@gmail.com'  
+    }
+    */
+ }
