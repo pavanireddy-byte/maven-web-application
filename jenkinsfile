@@ -10,7 +10,7 @@ node('master')
     {
     sh "${mavenHome}/bin/mvn clean package"
     }
-   /* stage('executesonarqubereport')
+   stage('executesonarqubereport')
     {
         sh "${mavenHome}/bin/mvn sonar:sonar"
     }
@@ -25,7 +25,8 @@ node('master')
         sh "scp -o stricthostkeychecking=no target/maven-web-application.war ec2-user@52.66.249.225:/opt/apache-tomcat-9.0.39/webapps/"
       }
     }
-    stage('sendmailnotification')
+   /*
+   stage('sendmailnotification')
     {
       mail bcc: '', body: '''project is done.
 
