@@ -9,4 +9,12 @@ stage('build')
 {
 sh "${mavenHome}/bin/mvn clean package"
 }
+stage('executesonarreport')
+{
+sh "${mavenHome}/bin/mvn sonar:sonar"
+}
+stage('uploadartifactintonexus')
+{
+sh "${mavenHome}/bin/mvn deploy"
+}
 }
