@@ -17,4 +17,9 @@ stage('uploadartifactintonexus')
 {
 sh "${mavenHome}/bin/mvn deploy"
 }
+stage('deployappintotomcatserver')
+{
+sshagent(['c9b02c63-f0fe-4391-bae0-eb4e23e5a5cb']) 
+
+}
 }
