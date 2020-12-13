@@ -109,7 +109,7 @@
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-  	      <url>http://13.233.116.8:8081/repository/oneplus-snapshots/</url>
+  	      <url>http://13.233.116.8:8081/repository/joy-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
