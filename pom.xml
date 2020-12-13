@@ -100,11 +100,11 @@
 	
 	<distributionManagement>
 	
-<!-- 	    <repository>
+ 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://52.66.239.84:8081/repository/oneplus-releases/</url>
-	    </repository> -->
+	      <url>http://13.233.116.8:8081/repository/joy-release/</url>
+	    </repository> 
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
